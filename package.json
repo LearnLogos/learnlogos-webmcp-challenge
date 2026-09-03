@@ -1,0 +1,43 @@
+{
+  "name": "learnlogos-webmcp-contest",
+  "version": "0.1.0-private-candidate",
+  "private": true,
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "eslint .",
+    "start": "node scripts/start-standalone.cjs",
+    "test": "vitest run",
+    "test:live-browser": "playwright test"
+  },
+  "dependencies": {
+    "ioredis": "5.10.1",
+    "next": "16.2.12",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.59.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@types/node": "20.19.39",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.1.1",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.12",
+    "jsdom": "29.1.0",
+    "typescript": "5.9.3",
+    "vite": "8.2.2",
+    "vitest": "4.1.11"
+  },
+  "packageManager": "pnpm@10.23.0",
+  "pnpm": {
+    "overrides": {
+      "postcss": "8.5.23",
+      "sharp": "0.35.3"
+    }
+  }
+}

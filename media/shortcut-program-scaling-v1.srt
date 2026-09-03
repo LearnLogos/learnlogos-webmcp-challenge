@@ -1,0 +1,83 @@
+1
+00:00:00,000 --> 00:00:00,020
+okay in fact let's make this our first shortcut
+
+2
+00:00:00,000 --> 00:00:06,100
+changing the scaling all right so a couple ways to do that first if you go
+
+3
+00:00:06,080 --> 00:00:11,180
+over to the top right and click the three dots you'll see that
+
+4
+00:00:11,160 --> 00:00:14,140
+you have some quick program scaling and that's a quick and
+
+5
+00:00:14,120 --> 00:00:16,900
+easy way to get in there and just grab and go
+
+6
+00:00:16,880 --> 00:00:23,100
+but it turns out there is a secret command and it's called set programming scaling to and then
+
+7
+00:00:23,080 --> 00:00:29,680
+you put in your percent 121 percent and that will allow you to quickly set it exactly what you want
+
+8
+00:00:29,660 --> 00:00:36,080
+and once you get it I recommend you do the following open favorites so go to tools type in
+
+9
+00:00:36,060 --> 00:00:42,320
+fav for favorites click on favorites and then what you do is you click on it type in your information
+
+10
+00:00:42,300 --> 00:00:43,731
+you'll see the drop down menu.
+
+11
+00:00:44,073 --> 00:00:47,620
+And once you get your sweet spot, left click on that and either
+
+12
+00:00:47,600 --> 00:00:53,100
+drag it to favorites over here at the left, or if it's something you frequently use, then just drag
+
+13
+00:00:53,080 --> 00:00:54,734
+it to the shortcut toolbar and release.
+
+14
+00:00:55,400 --> 00:00:57,840
+And then you can right click on that, give it a name.
+
+15
+00:00:58,400 --> 00:01:01,227
+You might want to just, I like leaving the whole command in there.
+
+16
+00:01:01,268 --> 00:01:02,560
+That way I can reaccess the
+
+17
+00:01:02,540 --> 00:01:03,040
+command.
+
+18
+00:01:03,406 --> 00:01:04,252
+But now you've got it.
+
+19
+00:01:04,293 --> 00:01:08,160
+You can just click it and boom, you've got that setting available for
+
+20
+00:01:08,140 --> 00:01:12,360
+you at any time and that's nice when you're changing screens or moving Logos to different
+
+21
+00:01:12,340 --> 00:01:14,902
+resolutions or use on different computers.

@@ -1,0 +1,27 @@
+# Copy to .env.local and replace every placeholder. Never commit real values.
+WEBMCP_DEPLOYMENT=contest
+WEBMCP_CONTEST_HOST=challenge.example.com
+WEBMCP_ENABLED=true
+WEBMCP_PUBLIC_TOOLS_ENABLED=true
+WEBMCP_AUTHENTICATED_TOOLS_ENABLED=false
+WEBMCP_TRANSACTIONAL_TOOLS_ENABLED=false
+WEBMCP_PUBLIC_PREVIEWS_ENABLED=true
+
+# Use a dedicated, authenticated TLS Redis instance that is not used by production.
+WEBMCP_CONTEST_REDIS_URL=rediss://contest-user:replace-me@redis.example.com:6380/0
+WEBMCP_CONTEST_CLIENT_IP_HEADER=x-real-ip
+WEBMCP_CONTEST_CLIENT_HASH_SECRET=replace-with-a-dedicated-random-secret-of-at-least-32-bytes
+
+# The reverse proxy must overwrite the selected client-IP header.
+WEBMCP_CONTEST_SESSION_TTL_SECONDS=1800
+WEBMCP_CONTEST_MAX_SESSIONS=1000
+WEBMCP_CONTEST_SESSION_SEARCH_LIMIT=30
+WEBMCP_CONTEST_SESSION_SEARCH_WINDOW_SECONDS=60
+WEBMCP_CONTEST_CLIENT_SEARCH_LIMIT=30
+WEBMCP_CONTEST_GLOBAL_SEARCH_LIMIT=300
+WEBMCP_CONTEST_GLOBAL_SEARCH_WINDOW_SECONDS=60
+
+# Use the normalized absolute path to this repository's media directory.
+WEBMCP_CONTEST_MEDIA_ROOT=/absolute/path/to/learnlogos-webmcp-contest/media
+WEBMCP_CONTEST_MEDIA_GRANT_SECRET=replace-with-a-second-dedicated-random-secret-of-at-least-32-bytes
+WEBMCP_CONTEST_MEDIA_GRANT_TTL_SECONDS=120
