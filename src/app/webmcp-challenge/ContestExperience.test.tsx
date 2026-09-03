@@ -120,6 +120,12 @@ describe('contest browser experience', () => {
     await act(async () => { fireEvent.submit(screen.getByRole('button', { name: 'Search training' })) })
 
     const player = await screen.findByLabelText('Play Set Exact Program Scaling')
+    expect(screen.getByLabelText('Public content and licensing').textContent).toContain(
+      'LearnLogos-owned narration, captions, and instructional graphics',
+    )
+    expect(screen.getByLabelText('Public content and licensing').textContent).toContain(
+      'not sponsored or endorsed by Logos',
+    )
     expect(player.getAttribute('src')).toBe(playback.url)
     expect(player.getAttribute('preload')).toBe('metadata')
     expect(player.querySelector('track')?.getAttribute('src')).toBe(playback.captionsUrl)

@@ -120,7 +120,17 @@
 .summary { margin: .5rem 0 0; color: #334155; line-height: 1.55; }
 .source { margin: .75rem 0 0; color: #64748b; font-size: .8rem; line-height: 1.45; }
 .access { margin: .75rem 0 0; color: #1d4ed8; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.video { width: 100%; margin-top: 1rem; border-radius: .8rem; background: #020617; }
+.mediaQualifier {
+  margin: 1rem 0 0;
+  padding: .8rem .9rem;
+  border: 1px solid #bfdbfe;
+  border-radius: .7rem;
+  background: #eff6ff;
+  color: #334155;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+.video { width: 100%; margin-top: .75rem; border-radius: .8rem; background: #020617; }
 
 .isolation {
   max-width: 48rem;

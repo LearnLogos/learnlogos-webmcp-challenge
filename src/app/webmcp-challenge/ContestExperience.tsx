@@ -40,15 +40,22 @@ function SearchResultItem({ item }: { item: SearchItem }) {
         {item.access === 'free' ? 'Free contest excerpt' : 'Owned content'}
       </p>
       {item.playback && (
-        <video
-          aria-label={`Play ${item.title}`}
-          className={styles.video}
-          controls
-          preload="metadata"
-          src={item.playback.url}
-        >
-          <track default kind="captions" label="English" src={item.playback.captionsUrl} srcLang="en" />
-        </video>
+        <>
+          <p aria-label="Public content and licensing" className={styles.mediaQualifier}>
+            Rights-safe public excerpt: LearnLogos-owned narration, captions, and instructional
+            graphics, licensed CC BY 4.0. LearnLogos is independent and is not sponsored or
+            endorsed by Logos.
+          </p>
+          <video
+            aria-label={`Play ${item.title}`}
+            className={styles.video}
+            controls
+            preload="metadata"
+            src={item.playback.url}
+          >
+            <track default kind="captions" label="English" src={item.playback.captionsUrl} srcLang="en" />
+          </video>
+        </>
       )}
     </li>
   )
