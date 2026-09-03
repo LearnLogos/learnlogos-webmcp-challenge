@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState, type FormEvent } from 'react'
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import type { ContestSearchEnvelope } from '@/lib/webmcp/contracts/v1/contest-search'
 import { resolveBrowserModelContext } from '@/lib/webmcp/registration/browser-model-context'
 import { registerWebMcpTools } from '@/lib/webmcp/registration/register-tools'
@@ -97,17 +97,29 @@ function ContestSearchForm({ tool }: { tool: ReturnType<typeof createSearchTrain
   const [question, setQuestion] = useState<string>(DEMO_QUESTIONS[0])
   const [result, setResult] = useState<ContestSearchEnvelope | null>(null)
   const [error, setError] = useState('')
+  const latestRequest = useRef(0)
 
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+  async function runSearch(selectedQuestion: string) {
+    const request = ++latestRequest.current
     setError('')
+    setResult(null)
     try {
-      const response = await tool.execute({ question }, { signal: new AbortController().signal })
-      setResult(response as ContestSearchEnvelope)
+      const response = await tool.execute(
+        { question: selectedQuestion, limit: 1 },
+        { signal: new AbortController().signal },
+      )
+      if (request === latestRequest.current) setResult(response as ContestSearchEnvelope)
     } catch {
-      setResult(null)
-      setError('The contest search is temporarily unavailable.')
+      if (request === latestRequest.current) {
+        setResult(null)
+        setError('The contest search is temporarily unavailable.')
+      }
     }
+  }
+
+  function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    void runSearch(question)
   }
 
   return (
@@ -117,7 +129,10 @@ function ContestSearchForm({ tool }: { tool: ReturnType<typeof createSearchTrain
         <select
           id="contest-question"
           className={styles.input}
-          onChange={(event) => setQuestion(event.target.value)}
+          onChange={(event) => {
+            setQuestion(event.target.value)
+            void runSearch(event.target.value)
+          }}
           value={question}
         >
           {DEMO_QUESTIONS.map((demoQuestion) => (

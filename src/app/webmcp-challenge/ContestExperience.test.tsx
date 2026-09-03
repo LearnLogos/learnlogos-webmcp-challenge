@@ -86,7 +86,7 @@ describe('contest browser experience', () => {
     await waitFor(() => expect(screen.getByTestId('webmcp-status').textContent).toContain('unsupported'))
   })
 
-  it('uses the same validated tool for the visible search experience', async () => {
+  it('automatically searches one best result when a guided question is selected', async () => {
     const fetcher = vi.fn(async () => Response.json(ENVELOPE))
     vi.stubGlobal('fetch', fetcher)
     render(<ContestExperience />)
@@ -94,11 +94,16 @@ describe('contest browser experience', () => {
     fireEvent.change(screen.getByLabelText('Learning question'), {
       target: { value: 'How do I use the reading-plan calendar?' },
     })
-    await act(async () => { fireEvent.submit(screen.getByRole('button', { name: 'Search training' })) })
 
     await waitFor(() => expect(screen.getByTestId('contest-result').textContent)
       .toContain('WebMCP Challenge Learner'))
     expect(fetcher).toHaveBeenCalledTimes(1)
+    expect(fetcher).toHaveBeenCalledWith('/api/webmcp/contest/search', expect.objectContaining({
+      body: JSON.stringify({
+        question: 'How do I use the reading-plan calendar?',
+        limit: 1,
+      }),
+    }))
   })
 
   it('renders approved result metadata without exposing media paths or digests', async () => {
