@@ -123,10 +123,10 @@
 .mediaQualifier {
   margin: 1rem 0 0;
   padding: .8rem .9rem;
-  border: 1px solid #bfdbfe;
+  border: 1px solid #fecdd3;
   border-radius: .7rem;
-  background: #eff6ff;
-  color: #334155;
+  background: #fff1f2;
+  color: #4c0519;
   font-size: .78rem;
   line-height: 1.5;
 }

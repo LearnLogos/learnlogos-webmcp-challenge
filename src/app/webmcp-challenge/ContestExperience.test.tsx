@@ -48,8 +48,21 @@ describe('contest browser experience', () => {
   it('starts with a verified demonstration question and visible isolation notice', () => {
     render(<ContestExperience />)
 
-    expect((screen.getByLabelText('Learning question') as HTMLInputElement).value)
-      .toBe('How do I set an exact program scaling percentage?')
+    const question = screen.getByLabelText('Learning question') as HTMLSelectElement
+    expect(question.tagName).toBe('SELECT')
+    expect(question.options).toHaveLength(8)
+    expect(Array.from(question.options, ({ text }) => text)).toEqual([
+      'How do I set program scaling to a specific percentage?',
+      'How can I make the Logos interface larger?',
+      'How do I save a scaling command to Favorites?',
+      'How do I change scaling from the toolbar?',
+      'How do I jump to my next reading?',
+      'How do I use the reading-plan calendar?',
+      'How do I mark my reading progress complete?',
+      'How do I move to the next reading in my plan?',
+    ])
+    expect(question.value)
+      .toBe('How do I set program scaling to a specific percentage?')
     expect(screen.getByText(/isolated from the production LearnLogos website/i)).toBeTruthy()
   })
 
@@ -78,7 +91,9 @@ describe('contest browser experience', () => {
     vi.stubGlobal('fetch', fetcher)
     render(<ContestExperience />)
 
-    fireEvent.change(screen.getByLabelText('Learning question'), { target: { value: 'search' } })
+    fireEvent.change(screen.getByLabelText('Learning question'), {
+      target: { value: 'How do I use the reading-plan calendar?' },
+    })
     await act(async () => { fireEvent.submit(screen.getByRole('button', { name: 'Search training' })) })
 
     await waitFor(() => expect(screen.getByTestId('contest-result').textContent)

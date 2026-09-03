@@ -10,6 +10,17 @@ import styles from './ContestExperience.module.css'
 type RegistrationStatus = 'starting' | 'registered' | 'unsupported' | 'error'
 type SearchItem = ContestSearchEnvelope['data']['results'][number]
 
+const DEMO_QUESTIONS = [
+  'How do I set program scaling to a specific percentage?',
+  'How can I make the Logos interface larger?',
+  'How do I save a scaling command to Favorites?',
+  'How do I change scaling from the toolbar?',
+  'How do I jump to my next reading?',
+  'How do I use the reading-plan calendar?',
+  'How do I mark my reading progress complete?',
+  'How do I move to the next reading in my plan?',
+] as const
+
 function useWebMcpRegistration(tool: ReturnType<typeof createSearchTrainingWebMcpTool>) {
   const [status, setStatus] = useState<RegistrationStatus>('starting')
   useEffect(() => {
@@ -83,7 +94,7 @@ function SearchResult({ result }: { result: ContestSearchEnvelope }) {
 }
 
 function ContestSearchForm({ tool }: { tool: ReturnType<typeof createSearchTrainingWebMcpTool> }) {
-  const [question, setQuestion] = useState('How do I set an exact program scaling percentage?')
+  const [question, setQuestion] = useState(DEMO_QUESTIONS[0])
   const [result, setResult] = useState<ContestSearchEnvelope | null>(null)
   const [error, setError] = useState('')
 
@@ -103,14 +114,16 @@ function ContestSearchForm({ tool }: { tool: ReturnType<typeof createSearchTrain
     <>
       <form className={styles.form} onSubmit={submit}>
         <label className={styles.srOnly} htmlFor="contest-question">Learning question</label>
-        <input
+        <select
           id="contest-question"
           className={styles.input}
-          maxLength={500}
           onChange={(event) => setQuestion(event.target.value)}
-          required
           value={question}
-        />
+        >
+          {DEMO_QUESTIONS.map((demoQuestion) => (
+            <option key={demoQuestion} value={demoQuestion}>{demoQuestion}</option>
+          ))}
+        </select>
         <button className={styles.button} type="submit">
           Search training
         </button>
