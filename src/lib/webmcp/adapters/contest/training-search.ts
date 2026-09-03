@@ -4,6 +4,10 @@ import type {
   TrainingSearchQuery,
 } from '../../ports/training-search'
 
+const QUERY_STOP_WORDS = new Set([
+  'a', 'an', 'and', 'can', 'do', 'from', 'how', 'i', 'in', 'is', 'make', 'my', 'of', 'on', 'the', 'to',
+])
+
 function tokenize(value: string): string[] {
   return value
     .normalize('NFKC')
@@ -36,7 +40,9 @@ export function createContestTrainingSearchAdapter(
   return {
     async search(query) {
       validateQuery(query)
-      const queryTerms = new Set(tokenize(query.question))
+      const queryTerms = new Set(
+        tokenize(query.question).filter((term) => !QUERY_STOP_WORDS.has(term)),
+      )
       return contestFixtures
         .filter((candidate) => !query.logosVersion || candidate.logosVersion === query.logosVersion)
         .map((candidate) => ({ ...candidate, score: scoreCandidate(candidate, queryTerms) }))

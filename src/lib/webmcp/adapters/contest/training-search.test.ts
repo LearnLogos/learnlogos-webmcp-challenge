@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { createContestTrainingSearchAdapter } from './training-search'
+import { contestTrainingFixtures } from '../../content/contest-content'
 import type { TrainingSearchCandidate } from '../../ports/training-search'
 
 const fixture = (
@@ -59,6 +60,25 @@ describe('contest training search adapter', () => {
       fixture('search', 'Search training', ['search']),
     ])
     expect(await adapter.search({ question: 'unrelated', candidateLimit: 5 })).toEqual([])
+  })
+
+  it('maps every guided demonstration question to its intended lesson', async () => {
+    const adapter = createContestTrainingSearchAdapter(contestTrainingFixtures)
+    const cases = [
+      ['How do I set program scaling to a specific percentage?', 'shortcut-program-scaling-v1'],
+      ['How can I make the Logos interface larger?', 'shortcut-program-scaling-v1'],
+      ['How do I save a scaling command to Favorites?', 'shortcut-program-scaling-v1'],
+      ['How do I change scaling from the toolbar?', 'shortcut-program-scaling-v1'],
+      ['How do I jump to my next reading?', 'shortcut-next-reading-v1'],
+      ['How do I use the reading-plan calendar?', 'shortcut-next-reading-v1'],
+      ['How do I mark my reading progress complete?', 'shortcut-next-reading-v1'],
+      ['How do I move to the next reading in my plan?', 'shortcut-next-reading-v1'],
+    ] as const
+
+    for (const [question, assetId] of cases) {
+      const results = await adapter.search({ question, candidateLimit: 2 })
+      expect(results.map((result) => result.assetId)).toEqual([assetId])
+    }
   })
 
   it('rejects invalid limits at its boundary', async () => {
