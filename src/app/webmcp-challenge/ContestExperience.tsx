@@ -94,7 +94,7 @@ function SearchResult({ result }: { result: ContestSearchEnvelope }) {
 }
 
 function ContestSearchForm({ tool }: { tool: ReturnType<typeof createSearchTrainingWebMcpTool> }) {
-  const [question, setQuestion] = useState(DEMO_QUESTIONS[0])
+  const [question, setQuestion] = useState<string>(DEMO_QUESTIONS[0])
   const [result, setResult] = useState<ContestSearchEnvelope | null>(null)
   const [error, setError] = useState('')
 
