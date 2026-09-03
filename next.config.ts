@@ -12,6 +12,10 @@ const securityHeaders = [
 
 const config: NextConfig = {
   output: 'standalone',
+  outputFileTracingIncludes: {
+    '/api/webmcp/contest/captions/*': ['./media/**/*.srt'],
+    '/api/webmcp/contest/media/*': ['./media/**/*.mp4'],
+  },
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
   async headers() { return [{ source: '/(.*)', headers: securityHeaders }] },

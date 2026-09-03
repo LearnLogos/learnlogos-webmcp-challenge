@@ -10,4 +10,11 @@ describe('contest security headers', () => {
     expect(values.get('Permissions-Policy')).toContain('camera=()')
     expect(values.get('Cross-Origin-Resource-Policy')).toBe('same-origin')
   })
+
+  it('bundles only approved contest media with the server routes that read it', () => {
+    expect(config.outputFileTracingIncludes).toEqual({
+      '/api/webmcp/contest/captions/*': ['./media/**/*.srt'],
+      '/api/webmcp/contest/media/*': ['./media/**/*.mp4'],
+    })
+  })
 })
